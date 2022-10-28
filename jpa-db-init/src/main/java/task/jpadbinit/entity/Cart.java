@@ -16,10 +16,10 @@ public class Cart {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "\"userId\"")
     private User user;
 
-    @Column(name = "status", columnDefinition = "SMALLINT")
+    @Column(name = "status", columnDefinition = "SMALLINT", nullable = false)
     private Integer status;
 
     @Column(name = "\"firstName\"", length = 50)
@@ -47,7 +47,7 @@ public class Cart {
     private String content;
 
     @CreationTimestamp
-    @Column(name = "\"createdAt\"")
+    @Column(name = "\"createdAt\"", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

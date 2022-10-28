@@ -28,13 +28,13 @@ public class User {
     @Column(name = "email", length = 50)
     private String email;
 
-    @Column(name = "\"passwordHash\"", length = 32)
+    @Column(name = "\"passwordHash\"", length = 32, nullable = false)
     private String passwordHash;
 
-    @Column(name = "vendor")
+    @Column(name = "vendor", nullable = false)
     private Boolean vendor;
 
-    @Column(name = "\"registeredAt\"")
+    @Column(name = "\"registeredAt\"", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date registeredAt;
 
