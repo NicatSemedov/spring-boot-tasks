@@ -1,4 +1,4 @@
-package task.jpadbinit.entity;
+package task.restapi.entity;
 
 import javax.persistence.*;
 import java.util.HashSet;

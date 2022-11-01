@@ -1,4 +1,4 @@
-package task.jpadbinit.entity;
+package task.restapi.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
