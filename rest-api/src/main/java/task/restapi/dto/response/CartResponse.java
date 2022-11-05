@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class UserResponse {
+public class CartResponse {
 
     private Long id;
+
+    private Integer status;
 
     private String firstName;
 
@@ -19,9 +21,15 @@ public class UserResponse {
 
     private String email;
 
-    private Boolean vendor;
+    private String city;
 
-    private String intro;
+    private String country;
 
-    private String profile;
+    private String content;
+
+//    private Date createdAt;
+
+//    private Date updatedAt;
+
+//    private UserResponse user;
 }

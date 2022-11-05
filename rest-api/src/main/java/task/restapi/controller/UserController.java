@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import task.restapi.dto.request.UserRequest;
+import task.restapi.dto.response.CartResponse;
 import task.restapi.dto.response.UserResponse;
 import task.restapi.service.interfaces.UserServiceInterface;
 
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,7 +44,11 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(userService.deleteUser(id));
+        return ResponseEntity.status(NO_CONTENT).body(userService.deleteUser(id));
     }
 
+    @GetMapping("/{id}/carts")
+    public ResponseEntity<List<CartResponse>> getUserCarts(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userService.getUserCarts(id));
+    }
 }

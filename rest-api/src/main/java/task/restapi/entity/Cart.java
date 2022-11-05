@@ -1,5 +1,7 @@
 package task.restapi.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +10,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "cart")
+@Data
+@NoArgsConstructor
 public class Cart {
 
     @Id
@@ -15,7 +19,7 @@ public class Cart {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "\"userId\"")
     private User user;
 
