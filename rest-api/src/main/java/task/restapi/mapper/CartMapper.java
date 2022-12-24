@@ -1,9 +1,9 @@
-package task.restapi.dto.mapper;
+package task.restapi.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import task.restapi.dto.request.CartRequest;
-import task.restapi.dto.response.CartResponse;
+import task.restapi.mapper.request.CartRequest;
+import task.restapi.mapper.response.CartResponse;
 import task.restapi.entity.Cart;
 
 import java.util.List;

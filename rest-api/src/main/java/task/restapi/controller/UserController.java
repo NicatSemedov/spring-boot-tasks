@@ -3,9 +3,10 @@ package task.restapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import task.restapi.dto.request.UserRequest;
-import task.restapi.dto.response.CartResponse;
-import task.restapi.dto.response.UserResponse;
+import task.restapi.mapper.request.UserRequest;
+import task.restapi.mapper.response.CartResponse;
+import task.restapi.mapper.response.ProductResponse;
+import task.restapi.mapper.response.UserResponse;
 import task.restapi.service.interfaces.UserServiceInterface;
 
 import javax.validation.Valid;
@@ -50,5 +51,10 @@ public class UserController {
     @GetMapping("/{id}/carts")
     public ResponseEntity<List<CartResponse>> getUserCarts(@PathVariable("id") Long id) {
         return ResponseEntity.ok(userService.getUserCarts(id));
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<List<ProductResponse>> getUserProducts(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(userService.getUserProducts(id));
     }
 }

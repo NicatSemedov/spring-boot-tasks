@@ -4,12 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import task.restapi.dto.mapper.CartMapper;
-import task.restapi.dto.request.CartRequest;
-import task.restapi.dto.response.CartResponse;
+import task.restapi.mapper.CartMapper;
+import task.restapi.mapper.request.CartRequest;
+import task.restapi.mapper.response.CartResponse;
 import task.restapi.entity.Cart;
 import task.restapi.repository.CartRepository;
 import task.restapi.service.interfaces.CartServiceInterface;
+import task.restapi.service.interfaces.UserServiceInterface;
 
 import java.util.List;
 
@@ -22,6 +23,8 @@ public class CartService implements CartServiceInterface {
     private final CartRepository cartRepository;
 
     private final CartMapper cartMapper;
+
+    private final UserServiceInterface userService;
 
     @Override
     public List<CartResponse> getAllCarts() {
@@ -40,6 +43,7 @@ public class CartService implements CartServiceInterface {
 
     @Override
     public CartResponse saveCart(CartRequest cartRequest) {
+        userService.getUserEntityById(cartRequest.getUserId());//check user exists
         Cart cartEntity = cartMapper.fromRequestToEntity(cartRequest);
         return cartMapper.fromEntityToResponse(cartRepository.save(cartEntity));
     }
@@ -47,6 +51,7 @@ public class CartService implements CartServiceInterface {
     @Override
     public Void updateCart(Long id, CartRequest cartRequest) {
         Cart cartEntity = getCartEntityById(id);
+        userService.getUserEntityById(cartRequest.getUserId());//check user exists
         Cart cartFromRequest = cartMapper.fromRequestToEntity(cartRequest);
         BeanUtils.copyProperties(cartFromRequest, cartEntity, "id", "createdAt");
         cartRepository.save(cartEntity);

@@ -1,4 +1,4 @@
-package task.restapi.dto.response;
+package task.restapi.mapper.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,5 +31,7 @@ public class CartResponse {
 
 //    private Date updatedAt;
 
-//    private UserResponse user;
+/*
+    private UserResponse user;
+*/
 }

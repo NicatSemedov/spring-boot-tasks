@@ -1,4 +1,4 @@
-package task.restapi.dto.request;
+package task.restapi.mapper.request;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,24 +7,24 @@ import task.restapi.validation.NullOrNotBlank;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
-public class UserRequest {
+public class CartRequest {
 
-    private Long id;
+    @NotNull
+    private Long userId;
+
+    @NotNull
+    private Integer status;
 
     @NotBlank
-    @Size(min = 3, max = 16)
     private String firstName;
 
     @NullOrNotBlank
-    @Size(min = 3, max = 16)
     private String middleName;
 
     @NotBlank
-    @Size(min = 3, max = 16)
     private String lastName;
 
     @NotBlank
@@ -35,15 +35,11 @@ public class UserRequest {
     private String email;
 
     @NotBlank
-    @Size(min = 8, max = 32)
-    private String password;
-
-    @NotNull
-    private Boolean vendor;
+    private String city;
 
     @NotBlank
-    private String intro;
+    private String country;
 
     @NotBlank
-    private String profile;
+    private String content;
 }

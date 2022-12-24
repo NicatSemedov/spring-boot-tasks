@@ -3,8 +3,8 @@ package task.restapi.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import task.restapi.dto.request.CartRequest;
-import task.restapi.dto.response.CartResponse;
+import task.restapi.mapper.request.CartRequest;
+import task.restapi.mapper.response.CartResponse;
 import task.restapi.service.interfaces.CartServiceInterface;
 
 import javax.validation.Valid;

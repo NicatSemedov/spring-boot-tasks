@@ -1,7 +1,7 @@
 package task.restapi.service.interfaces;
 
-import task.restapi.dto.request.CartRequest;
-import task.restapi.dto.response.CartResponse;
+import task.restapi.mapper.request.CartRequest;
+import task.restapi.mapper.response.CartResponse;
 
 import java.util.List;
 

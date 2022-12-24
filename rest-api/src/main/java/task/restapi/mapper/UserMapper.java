@@ -1,9 +1,9 @@
-package task.restapi.dto.mapper;
+package task.restapi.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import task.restapi.dto.request.UserRequest;
-import task.restapi.dto.response.UserResponse;
+import task.restapi.mapper.request.UserRequest;
+import task.restapi.mapper.response.UserResponse;
 import task.restapi.entity.User;
 
 import java.util.List;

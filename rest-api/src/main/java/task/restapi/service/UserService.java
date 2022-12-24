@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import task.restapi.dto.mapper.CartMapper;
-import task.restapi.dto.request.UserRequest;
-import task.restapi.dto.response.CartResponse;
-import task.restapi.dto.response.UserResponse;
+import task.restapi.mapper.CartMapper;
+import task.restapi.mapper.ProductMapper;
+import task.restapi.mapper.request.UserRequest;
+import task.restapi.mapper.response.CartResponse;
+import task.restapi.mapper.response.ProductResponse;
+import task.restapi.mapper.response.UserResponse;
 import task.restapi.entity.User;
-import task.restapi.dto.mapper.UserMapper;
+import task.restapi.mapper.UserMapper;
 import task.restapi.repository.UserRepository;
 import task.restapi.service.interfaces.UserServiceInterface;
 
@@ -28,6 +30,8 @@ public class UserService implements UserServiceInterface {
     private final UserMapper userMapper;
 
     private final CartMapper cartMapper;
+
+    private final ProductMapper productMapper;
 
     @Override
     public List<UserResponse> getAllUsers() {
@@ -71,5 +75,12 @@ public class UserService implements UserServiceInterface {
         List<CartResponse> userCarts = cartMapper.fromEntitiesToResponseList(getUserEntityById(userId).getCarts());
         userCarts.sort(Comparator.comparing(CartResponse::getId));
         return userCarts;
+    }
+
+    @Override
+    public List<ProductResponse> getUserProducts(Long id) {
+        List<ProductResponse> userProducts = productMapper.fromEntitiesToResponseList(getUserEntityById(id).getProducts());
+        userProducts.sort(Comparator.comparing(ProductResponse::getId));
+        return userProducts;
     }
 }

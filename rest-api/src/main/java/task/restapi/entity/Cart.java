@@ -51,7 +51,7 @@ public class Cart {
     private String content;
 
     @CreationTimestamp
-    @Column(name = "\"createdAt\"", nullable = false)
+    @Column(name = "\"createdAt\"")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

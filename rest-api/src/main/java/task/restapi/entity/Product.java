@@ -1,27 +1,32 @@
 package task.restapi.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import task.restapi.enums.ProductType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
-@Table(name = "product")
-public class Product {
+@Table(name = "product", uniqueConstraints = {@UniqueConstraint(columnNames = {"slug"})})
+@Data
+@NoArgsConstructor
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "\"userId\"")
     private User user;
 
@@ -31,14 +36,15 @@ public class Product {
     @Column(name = "\"metaTitle\"", length = 100)
     private String metaTitle;
 
-    @Column(name="slug", length = 100, nullable = false)
+    @Column(name="slug", length = 100, unique = true, nullable = false)
     private String slug;
 
     @Column(name = "summary", columnDefinition = "TEXT")
     private String summary;
 
-    @Column(name = "type", columnDefinition = "SMALLINT", nullable = false)
-    private Integer type;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "type", nullable = false)
+    private ProductType type;
 
     @Column(name = "sku", length = 100, nullable = false)
     private String sku;
@@ -56,7 +62,7 @@ public class Product {
     private Boolean shop;
 
     @CreationTimestamp
-    @Column(name = "\"createdAt\"", nullable = false)
+    @Column(name = "\"createdAt\"")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
@@ -80,6 +86,11 @@ public class Product {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @ManyToMany(fetch = LAZY, cascade = {PERSIST, MERGE}, mappedBy = "products")
+    @ManyToMany(cascade = {PERSIST, MERGE}, fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "product_tag",
+            joinColumns = @JoinColumn(name = "\"productId\""),
+            inverseJoinColumns = @JoinColumn(name = "\"tagId\"")
+    )
     private Set<Tag> tags = new HashSet<>();
 }

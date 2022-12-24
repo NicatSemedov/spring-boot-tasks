@@ -1,8 +1,9 @@
 package task.restapi.service.interfaces;
 
-import task.restapi.dto.request.UserRequest;
-import task.restapi.dto.response.CartResponse;
-import task.restapi.dto.response.UserResponse;
+import task.restapi.mapper.request.UserRequest;
+import task.restapi.mapper.response.CartResponse;
+import task.restapi.mapper.response.ProductResponse;
+import task.restapi.mapper.response.UserResponse;
 import task.restapi.entity.User;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UserServiceInterface {
     List<CartResponse> getUserCarts(Long id);
 
     User getUserEntityById(Long userId);
+
+    List<ProductResponse> getUserProducts(Long id);
 }

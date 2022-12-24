@@ -1,15 +1,19 @@
 package task.restapi.entity;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 import static javax.persistence.CascadeType.MERGE;
 import static javax.persistence.CascadeType.PERSIST;
-import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "tag")
+@Data
+@NoArgsConstructor
 public class Tag {
 
     @Id
@@ -29,11 +33,6 @@ public class Tag {
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
 
-    @ManyToMany(fetch = LAZY, cascade = {PERSIST, MERGE})
-    @JoinTable(
-            name = "product_tag",
-            joinColumns = @JoinColumn(name = "\"tagId\""),
-            inverseJoinColumns = @JoinColumn(name = "\"productId\"")
-    )
+    @ManyToMany(cascade = {PERSIST, MERGE}, mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<Product> products = new HashSet<>();
 }
